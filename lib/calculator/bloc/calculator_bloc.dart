@@ -13,7 +13,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   void _onClear(Clear event, Emitter<CalculatorState> emit){
-    
+    _input = '';
     emit(const CalculatorState.initialValue());
   }
 
