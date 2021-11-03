@@ -32,4 +32,4 @@ class Calculate extends CalculatorEvent{}
 class CalculatorInitial extends CalculatorEvent{}
 
 class Clear extends CalculatorEvent{}
-
+class ClearLastInput extends CalculatorEvent{}

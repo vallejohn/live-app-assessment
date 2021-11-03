@@ -34,10 +34,10 @@ class CalculatorView extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Expanded(flex: 1, child: CustomButton(value: '', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '')))),
                   Expanded(flex: 1, child: CustomButton(value: '(', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '(')))),
                   Expanded(flex: 1, child: CustomButton(value: ')', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: ')')))),
-                  Expanded(flex: 1, child: CustomButton(value: 'clear', onPressed:() => context.read<CalculatorBloc>().add(Clear()))),
+                  Expanded(flex: 1, child: CustomButton(value: 'C', onPressed:() => context.read<CalculatorBloc>().add(Clear()))),
+                  Expanded(flex: 1, child: CustomButton(value: '<--', onPressed:() => context.read<CalculatorBloc>().add(ClearLastInput()))),
                 ],
               ),
               Row(
@@ -45,7 +45,7 @@ class CalculatorView extends StatelessWidget {
                   Expanded(flex: 1, child: CustomButton(value: '7', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '7')))),
                   Expanded(flex: 1, child: CustomButton(value: '8', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '8')))),
                   Expanded(flex: 1, child: CustomButton(value: '9', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '9')))),
-                  Expanded(flex: 1, child: CustomButton(value: 'x', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '+')))),
+                  Expanded(flex: 1, child: CustomButton(value: 'x', onPressed:() => context.read<CalculatorBloc>().add(const AcceptInput(value: '*')))),
                 ],
               ),
               Row(

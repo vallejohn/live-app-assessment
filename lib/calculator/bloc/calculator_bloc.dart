@@ -10,18 +10,26 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     on<AcceptInput>(_acceptInput);
     on<Calculate>(_onCalculate);
     on<Clear>(_onClear);
+    on<ClearLastInput>(_onClearLastInput);
+  }
+
+  String _input = '';
+
+  void _onClearLastInput(ClearLastInput event, Emitter<CalculatorState> emit){
+    try{
+      _input = _input.substring(0, _input.length - 1);
+      emit(CalculatorState.clearLastInput(_input));
+    }catch(e){
+      print(e);
+    }
+    
   }
 
   void _onClear(Clear event, Emitter<CalculatorState> emit){
     _input = '';
-    emit(const CalculatorState.initialValue());
+    emit(const CalculatorState.clear());
   }
 
-  
-  String firstValue = '';
-  String secondValue = '';
-
-  String _input = '';
 
   void _acceptInput(AcceptInput event, Emitter<CalculatorState> emit){
     _input = _input + event.value;
@@ -34,11 +42,12 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
     try{
       Expression exp = p.parse(_input);
-      _input = '';
-      exp.evaluate(EvaluationType.REAL, cm);
-      emit(CalculatorState.onCalculate(exp.evaluate(EvaluationType.REAL, cm)));
+      Expression evaluatedExp = exp.simplify();
+      print('Simplified: $evaluatedExp');
+      emit(CalculatorState.onCalculate(evaluatedExp.evaluate(EvaluationType.REAL, cm), ''));
     }catch(e){
-      emit(const CalculatorState.onCalculate(0));
+      print(e);
+      emit(const CalculatorState.onCalculate(0, 'Error'));
     }
   }
 
